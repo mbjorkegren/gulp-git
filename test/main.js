@@ -172,6 +172,18 @@ describe('gulp-git', function() {
 
     });
 
+    it('should show 2nd and 3rd commits from the log', function(done) {
+      var gitS = git.log({branch: 'f6f973ae720dc544474a7e33d4c628d83f7cc1c1', args: "--pretty=%H -n 2", cwd: "./"});
+      var s = "";
+      gitS.on('data', function(chunk){
+        s += chunk;
+      });
+      gitS.on('end', function(){
+        // Should only return two commit hashes, commit#3 followed by commit#2
+        should(/^f6f973ae720dc544474a7e33d4c628d83f7cc1c1\s+240761629f39ce1c19d928c0891917d110377a4c\s*$/.exec(s)).be.ok;
+        done();
+      });
+    });
 
     it('should create a new branch - with options', function(done){
       git.branch("testBranch", {cwd: "./test/", args: "--track"}, function(){

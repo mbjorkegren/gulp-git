@@ -3,6 +3,7 @@ module.exports = {
   add: require('./lib/add'),
   commit: require('./lib/commit'),
   addRemote: require('./lib/addRemote'),
+  log: require('./lib/log'),
   push: require('./lib/push'),
   pull: require('./lib/pull'),
   tag: require('./lib/tag'),
